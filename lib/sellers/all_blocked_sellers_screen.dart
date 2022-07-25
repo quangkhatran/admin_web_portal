@@ -144,10 +144,46 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(primary: Colors.red),
+                      style: ElevatedButton.styleFrom(primary: Colors.amber),
                       icon: const Icon(
                         Icons.person_pin_sharp,
-                        color: Colors.green,
+                        color: Colors.white,
+                      ),
+                      label: Text(
+                        'Total Earnings'.toUpperCase() +
+                            ' £ ' +
+                            allSellers!.docs[i].get('earnings').toString(),
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          letterSpacing: 3.0,
+                        ),
+                      ),
+                      onPressed: () {
+                        SnackBar snackBar = SnackBar(
+                          content: Text(
+                            'Total Earnings'.toUpperCase() +
+                                ' £ ' +
+                                allSellers!.docs[i].get('earnings').toString(),
+                            style: const TextStyle(
+                              fontSize: 36,
+                              color: Colors.black,
+                            ),
+                          ),
+                          backgroundColor: Colors.amber,
+                          duration: const Duration(seconds: 2),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(primary: Colors.green),
+                      icon: const Icon(
+                        Icons.person_pin_sharp,
+                        color: Colors.white,
                       ),
                       label: Text(
                         'Activate this Account'.toUpperCase(),
