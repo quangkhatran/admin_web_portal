@@ -3,22 +3,22 @@ import 'package:admin_web_portal/widgets/simple_app_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AllBlockedSellersScreen extends StatefulWidget {
+class AllVerifiedRidersScreen extends StatefulWidget {
   @override
-  State<AllBlockedSellersScreen> createState() =>
-      _AllBlockedSellersScreenState();
+  State<AllVerifiedRidersScreen> createState() =>
+      _AllVerifiedRidersScreenState();
 }
 
-class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
-  QuerySnapshot? allSellers;
+class _AllVerifiedRidersScreenState extends State<AllVerifiedRidersScreen> {
+  QuerySnapshot? allRiders;
 
-  displayDialogBoxForActivatingAccount(userDocumentID) {
+  displayDialogBoxForBlockingAccount(userDocumentID) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text(
-            'Activate Account',
+            'Block Account',
             style: TextStyle(
               fontSize: 25,
               letterSpacing: 2,
@@ -26,7 +26,7 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
             ),
           ),
           content: const Text(
-            'Do you want to activate this account?',
+            'Do you want to block this account?',
             style: TextStyle(
               fontSize: 16,
               letterSpacing: 2,
@@ -42,10 +42,10 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
             ElevatedButton(
               onPressed: () {
                 Map<String, dynamic> userDataMap = {
-                  'status': 'approved',
+                  'status': 'not approved',
                 };
                 FirebaseFirestore.instance
-                    .collection('sellers')
+                    .collection('riders')
                     .doc(userDocumentID)
                     .update(userDataMap)
                     .then(
@@ -54,7 +54,7 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                         MaterialPageRoute(builder: (c) => HomeScreen()));
                     SnackBar snackBar = const SnackBar(
                       content: Text(
-                        'Activated Successfully.',
+                        'Blocked Successfully.',
                         style: TextStyle(
                           fontSize: 36,
                           color: Colors.black,
@@ -79,23 +79,23 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
   void initState() {
     super.initState();
     FirebaseFirestore.instance
-        .collection('sellers')
-        .where('status', isEqualTo: 'not approved')
+        .collection('riders')
+        .where('status', isEqualTo: 'approved')
         .get()
-        .then((allVerifiedUsers) {
+        .then((allVerifiedRiders) {
       setState(() {
-        allSellers = allVerifiedUsers;
+        allRiders = allVerifiedRiders;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget displayBlockedSellersDesign() {
-      if (allSellers != null) {
+    Widget displayVerifiedRidersDesign() {
+      if (allRiders != null) {
         return ListView.builder(
           padding: const EdgeInsets.all(10.0),
-          itemCount: allSellers!.docs.length,
+          itemCount: allRiders!.docs.length,
           itemBuilder: (context, i) {
             return Card(
               elevation: 10.0,
@@ -111,14 +111,14 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             image: NetworkImage(
-                              allSellers!.docs[i].get('sellerAvatarUrl'),
+                              allRiders!.docs[i].get('riderAvatarUrl'),
                             ),
                             fit: BoxFit.fill,
                           ),
                         ),
                       ),
                       title: Text(
-                        allSellers!.docs[i].get('sellerName'),
+                        allRiders!.docs[i].get('riderName'),
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -131,7 +131,7 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                             width: 20.0,
                           ),
                           Text(
-                            allSellers!.docs[i].get('sellerEmail'),
+                            allRiders!.docs[i].get('riderEmail'),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(primary: Colors.amber),
+                      style: ElevatedButton.styleFrom(primary: Colors.green),
                       icon: const Icon(
                         Icons.person_pin_sharp,
                         color: Colors.white,
@@ -152,7 +152,7 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                       label: Text(
                         'Total Earnings'.toUpperCase() +
                             ' £ ' +
-                            allSellers!.docs[i].get('earnings').toString(),
+                            allRiders!.docs[i].get('earnings').toString(),
                         style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white,
@@ -164,13 +164,13 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                           content: Text(
                             'Total Earnings'.toUpperCase() +
                                 ' £ ' +
-                                allSellers!.docs[i].get('earnings').toString(),
+                                allRiders!.docs[i].get('earnings').toString(),
                             style: const TextStyle(
                               fontSize: 36,
                               color: Colors.black,
                             ),
                           ),
-                          backgroundColor: Colors.amber,
+                          backgroundColor: Colors.green,
                           duration: const Duration(seconds: 2),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -180,13 +180,13 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(primary: Colors.green),
+                      style: ElevatedButton.styleFrom(primary: Colors.red),
                       icon: const Icon(
                         Icons.person_pin_sharp,
                         color: Colors.white,
                       ),
                       label: Text(
-                        'Activate this Account'.toUpperCase(),
+                        'Block this Account'.toUpperCase(),
                         style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white,
@@ -194,8 +194,8 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
                         ),
                       ),
                       onPressed: () {
-                        displayDialogBoxForActivatingAccount(
-                            allSellers!.docs[i].id);
+                        displayDialogBoxForBlockingAccount(
+                            allRiders!.docs[i].id);
                       },
                     ),
                   ),
@@ -218,12 +218,12 @@ class _AllBlockedSellersScreenState extends State<AllBlockedSellersScreen> {
 
     return Scaffold(
       appBar: SimpleAppBar(
-        title: 'All Blocked Sellers Accounts',
+        title: 'All Verified Riders Accounts',
       ),
       body: Center(
         child: Container(
           width: MediaQuery.of(context).size.width * 0.5,
-          child: displayBlockedSellersDesign(),
+          child: displayVerifiedRidersDesign(),
         ),
       ),
     );

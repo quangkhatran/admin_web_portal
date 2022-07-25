@@ -91,7 +91,7 @@ class _AllVerifiedSellersScreenState extends State<AllVerifiedSellersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget displayVerifiedUsersDesign() {
+    Widget displayVerifiedSellersDesign() {
       if (allSellers != null) {
         return ListView.builder(
           padding: const EdgeInsets.all(10.0),
@@ -144,7 +144,7 @@ class _AllVerifiedSellersScreenState extends State<AllVerifiedSellersScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(primary: Colors.amber),
+                      style: ElevatedButton.styleFrom(primary: Colors.green),
                       icon: const Icon(
                         Icons.person_pin_sharp,
                         color: Colors.white,
@@ -223,7 +223,7 @@ class _AllVerifiedSellersScreenState extends State<AllVerifiedSellersScreen> {
       body: Center(
         child: Container(
           width: MediaQuery.of(context).size.width * 0.5,
-          child: displayVerifiedUsersDesign(),
+          child: displayVerifiedSellersDesign(),
         ),
       ),
     );

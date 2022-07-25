@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../authentication/login_screen.dart';
+import '../riders/all_verified_riders_screen.dart';
 import '../sellers/all_blocked_sellers_screen.dart';
 import '../sellers/all_verified_sellers_screen.dart';
 import '../users/all_blocked_users_screen.dart';
@@ -253,7 +254,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(40.0),
                     primary: Colors.amber,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((c) => AllVerifiedRidersScreen())));
+                  },
                 ),
                 const SizedBox(
                   width: 20.0,
