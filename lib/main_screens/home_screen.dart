@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../authentication/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -274,7 +277,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(40.0),
                 primary: Colors.amber,
               ),
-              onPressed: () {},
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (c) => LoginScreen()));
+              },
             ),
           ],
         ),
