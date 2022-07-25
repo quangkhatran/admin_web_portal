@@ -4,7 +4,17 @@ import 'package:flutter/material.dart';
 import './authentication/login_screen.dart';
 
 Future<void> main() async {
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    // Replace with actual values
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyAZHRISiTziMmcjZ_2GVHiTiS6HcdFmtKs",
+      appId: "1:220148377105:web:cd0d4033c9c28ce6f4f3b0",
+      messagingSenderId: "220148377105",
+      projectId: "localfun-8ad8f",
+    ),
+  );
   runApp(const MyApp());
 }
 
