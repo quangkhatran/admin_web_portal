@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../authentication/login_screen.dart';
+import '../users/all_verified_users_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -108,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Activate Users'.toUpperCase() +
+                    'All Verified Users'.toUpperCase() +
                         '\n' +
                         'Accounts'.toUpperCase(),
                     style: const TextStyle(
@@ -121,7 +122,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(40.0),
                     primary: Colors.amber,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((c) => AllVerifiedUsersScreen())));
+                  },
                 ),
                 const SizedBox(
                   width: 20.0,
@@ -133,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Block Users'.toUpperCase() +
+                    'All Blocked Users'.toUpperCase() +
                         '\n' +
                         'Accounts'.toUpperCase(),
                     style: const TextStyle(
@@ -162,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Activate Sellers'.toUpperCase() +
+                    'All Verified Sellers'.toUpperCase() +
                         '\n' +
                         'Accounts'.toUpperCase(),
                     style: const TextStyle(
@@ -187,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Block Sellers'.toUpperCase() +
+                    'All Blocked Sellers'.toUpperCase() +
                         '\n' +
                         'Accounts'.toUpperCase(),
                     style: const TextStyle(
@@ -216,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Activate Riders'.toUpperCase() +
+                    'All Verified Riders'.toUpperCase() +
                         '\n' +
                         'Accounts'.toUpperCase(),
                     style: const TextStyle(
@@ -241,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Block Riders'.toUpperCase() +
+                    'All Blocked Riders'.toUpperCase() +
                         '\n' +
                         'Accounts'.toUpperCase(),
                     style: const TextStyle(
