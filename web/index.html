@@ -54,5 +54,24 @@
       });
     });
   </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAZHRISiTziMmcjZ_2GVHiTiS6HcdFmtKs",
+      authDomain: "localfun-8ad8f.firebaseapp.com",
+      projectId: "localfun-8ad8f",
+      storageBucket: "localfun-8ad8f.appspot.com",
+      messagingSenderId: "220148377105",
+      appId: "1:220148377105:web:cd0d4033c9c28ce6f4f3b0"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
 </body>
 </html>
