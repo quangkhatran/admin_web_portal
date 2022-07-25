@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../authentication/login_screen.dart';
+import '../users/all_blocked_users_screen.dart';
 import '../users/all_verified_users_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -152,7 +153,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(40.0),
                     primary: Colors.cyan,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((c) => AllBlockedUsersScreen())));
+                  },
                 ),
               ],
             ),
